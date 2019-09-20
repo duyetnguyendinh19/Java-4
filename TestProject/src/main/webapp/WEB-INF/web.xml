@@ -28,6 +28,12 @@
   	<description></description>
   	<servlet-class>com.test.control.Controller</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>ControllerKhachHang</servlet-name>
+  	<display-name>ControllerKhachHang</display-name>
+  	<description></description>
+  	<servlet-class>com.test.control.ControllerKhachHang</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>MayTinhController</servlet-name>
   	<url-pattern>/MayTinhController</url-pattern>
@@ -43,5 +49,9 @@
   <servlet-mapping>
   	<servlet-name>Controller</servlet-name>
   	<url-pattern>/Controller</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ControllerKhachHang</servlet-name>
+  	<url-pattern>/ControllerKhachHang</url-pattern>
   </servlet-mapping>
 </web-app>
