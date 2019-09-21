@@ -31,27 +31,54 @@ public class ControllerKhachHang extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	
+	String makhBefore = "";
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		try {
 			String action = request.getParameter("action");
-			if(action.equals("Search")) {
+			if (action.equals("Search")) {
 				String tenkh = request.getParameter("txtTenKH");
 				List<KhachHang> lstKH = KhachHangDao.layDanhSachKH(tenkh);
-				request.setAttribute("listKH", lstKH );
+				request.setAttribute("listKH", lstKH);
 				String url = "lab7KhachHang.jsp";
 				RequestDispatcher rd = request.getRequestDispatcher(url);
 				rd.forward(request, response);
-			}else if(action.equals("Delete")) {
+			} else if (action.equals("Delete")) {
 				String makh = request.getParameter("txtMaKH");
 				boolean daxoa = KhachHangDao.xoaKhachHang(makh);
-				if(daxoa) {
+				if (daxoa) {
 					String url = "ControllerKhachHang?txtTenKH=&action=Search";
 					RequestDispatcher rd = request.getRequestDispatcher(url);
 					rd.forward(request, response);
 				}
+			} else if (action.equals("Insert") || action.equals("Update")) {
+				KhachHang kh = new KhachHang();
+				makhBefore = request.getParameter("txtMaKH");
+				if (makhBefore != null && !makhBefore.isEmpty()) {
+					kh = KhachHangDao.layThongTinKH(makhBefore);
+				}
+				request.setAttribute("kh", kh);
+				RequestDispatcher rd = request.getRequestDispatcher("lab7KhachHangChange.jsp");
+				rd.forward(request, response);
+			} else if (action.equals("Save")) {
+				String makh = request.getParameter("txtMaKH");
+				String hoten = request.getParameter("txtHoTen");
+				String matkhau = request.getParameter("txtPass");
+				String email = request.getParameter("txtEmail");
+				String soDT = request.getParameter("txtSDT");
+				KhachHang kh = new KhachHang(makh, matkhau, hoten, email, soDT);
+				if (makhBefore != null && !makhBefore.isEmpty()) {
+					KhachHangDao.updateKH(kh);
+				} else {
+					KhachHangDao.insertKH(kh);
+				}
+				String url = "ControllerKhachHang?txtTenKH=&action=Search";
+				RequestDispatcher rd = request.getRequestDispatcher(url);
+				rd.forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

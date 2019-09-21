@@ -17,7 +17,8 @@
 
 	<form action="ControllerKhachHang">
 		Tên KH: <input type="text" name="txtTenKH" value="" /> <input
-			type="submit" name="action" value="Search">
+			type="submit" name="action" value="Search"> <input
+			type="submit" name="action" value="Insert" />
 	</form>
 
 	<table border="1">
@@ -38,8 +39,9 @@
 					<td>${rows.email}</td>
 					<td>${rows.soDienThoai}</td>
 					<td><input type="hidden" name="txtMaKH"
-						value="${rows.maKhachHang}" /> <input type="submit"
-						name="action" value="Delete" /></td>
+						value="${rows.maKhachHang}" /> <input type="submit" name="action"
+						value="Update" /> <input type="submit" name="action"
+						value="Delete" /></td>
 				</tr>
 			</form>
 		</c:forEach>

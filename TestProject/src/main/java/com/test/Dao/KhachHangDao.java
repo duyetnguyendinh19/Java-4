@@ -48,4 +48,33 @@ public class KhachHangDao {
 			return false;
 		}
 	}
+	
+	public static boolean insertKH(KhachHang kh) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.save(kh);
+			session.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+			return false;
+		}
+	}
+	
+	public static boolean updateKH(KhachHang kh) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.update(kh);
+			session.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+			return false;
+		}
+	}
+	
 }
