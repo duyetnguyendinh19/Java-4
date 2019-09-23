@@ -27,6 +27,8 @@
         <property name="show_sql">true</property>
  
         <mapping class="com.test.entity.KhachHang" />
+        <mapping class="com.test.entity.Employee" />
+        <mapping class="com.test.entity.Address" />
  
     </session-factory>
 </hibernate-configuration>
